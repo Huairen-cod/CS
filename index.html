@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #accef5 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.85);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    @supports (-webkit-backdrop-filter: none) {
+      .login-container {
+        background: rgba(255, 255, 255, 0.75);
+      }
+    }
+
+    .login-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-header {
+      padding: 2rem;
+      border-radius: 1rem 1rem 0 0;
+      position: relative;
+    }
+
+    .login-header h1 {
+      color: #2e2e2e;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-header p {
+      color: #2e2e2e;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #666;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .form-group input:focus {
+      border-color: #667eea;
+      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: #3197ff;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-btn:hover {
+      background: #cfccd1;
+    }
+
+    .login-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .login-btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .extra-links {
+      padding: 0 2rem 2rem;
+      background: white;
+      border-radius: 0 0 1rem 1rem;
+    }
+
+    .extra-links a {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* 添加背景动画图案 */
+    .background-shapes {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 20s infinite linear;
+    }
+
+    .shape:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      left: 10%;
+      animation-duration: 15s;
+    }
+
+    .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      right: 15%;
+      top: 20%;
+      animation-duration: 25s;
+    }
+
+    .shape:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      bottom: 20%;
+      left: 20%;
+      animation-duration: 20s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(100px, 100px) rotate(180deg);
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    form {
+      padding: 2rem;
+      background: white;
+      border-radius: 0 0 1rem 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>校园通</h1>
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" placeholder="请输入用户名" required>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" placeholder="请输入密码" required>
+      </div>
+      <button type="submit" class="login-btn">登录</button>
+    </form>
+    <div class="extra-links">
+      <a href="#">忘记密码</a>
+    </div>
+  </div>
+</body>
+
+</html>
